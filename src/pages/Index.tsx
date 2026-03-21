@@ -346,7 +346,7 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">Words I Live By</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {quotes.map((q, i) => (
+          {content.quotes.map((q, i) => (
             <div key={i} className={`rounded-2xl p-7 border border-border text-center card-hover ${i === 1 ? "bg-gradient-to-br from-accent/5 to-warm/5" : "bg-card"}`}>
               <div className="w-11 h-11 rounded-full bg-warm/10 flex items-center justify-center mx-auto mb-4">
                 <Quote className="w-5 h-5 text-warm" />
