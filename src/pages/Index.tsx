@@ -68,7 +68,7 @@ const Index = () => {
               <span className="block mt-1">Debnath</span>
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/70 leading-relaxed mb-10 max-w-lg">
-              An MBBS student sharing my journey, achievements, medical learning, study practices, and life experiences to inspire and support others.
+              {content.heroSubtext}
             </p>
             <div className="flex flex-wrap gap-4 mb-12">
               <Button size="lg" asChild className="rounded-full font-semibold shadow-xl bg-accent hover:bg-accent/90 text-accent-foreground px-7">
