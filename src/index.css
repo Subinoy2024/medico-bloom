@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,32 +6,36 @@
 
 @layer base {
   :root {
-    --background: 200 20% 98%;
-    --foreground: 200 25% 15%;
+    --background: 40 25% 97%;
+    --foreground: 220 20% 16%;
     --card: 0 0% 100%;
-    --card-foreground: 200 25% 15%;
+    --card-foreground: 220 20% 16%;
     --popover: 0 0% 100%;
-    --popover-foreground: 200 25% 15%;
-    --primary: 178 55% 35%;
+    --popover-foreground: 220 20% 16%;
+    --primary: 174 50% 36%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 60% 95%;
-    --secondary-foreground: 200 25% 15%;
-    --muted: 210 30% 95%;
-    --muted-foreground: 200 15% 50%;
-    --accent: 152 55% 45%;
+    --secondary: 200 40% 94%;
+    --secondary-foreground: 220 20% 16%;
+    --muted: 35 20% 94%;
+    --muted-foreground: 220 12% 48%;
+    --accent: 155 45% 42%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 210 25% 90%;
-    --input: 210 25% 90%;
-    --ring: 178 55% 35%;
+    --border: 30 15% 89%;
+    --input: 30 15% 89%;
+    --ring: 174 50% 36%;
     --radius: 0.75rem;
+    --warm: 25 60% 55%;
+    --warm-foreground: 0 0% 100%;
 
-    --hero-gradient: linear-gradient(135deg, hsl(178 55% 35%), hsl(200 60% 40%), hsl(178 55% 35%));
-    --card-shadow: 0 4px 20px -4px hsl(200 30% 50% / 0.12);
-    --card-shadow-hover: 0 12px 32px -8px hsl(178 55% 35% / 0.2);
-    --glass-bg: hsl(0 0% 100% / 0.7);
-    --glass-border: hsl(0 0% 100% / 0.3);
+    --hero-gradient: linear-gradient(135deg, hsl(174 50% 36%), hsl(195 45% 42%), hsl(174 42% 44%));
+    --warm-gradient: linear-gradient(135deg, hsl(25 60% 55%), hsl(15 55% 50%));
+    --soft-gradient: linear-gradient(135deg, hsl(200 40% 94%), hsl(174 30% 92%));
+    --card-shadow: 0 4px 24px -6px hsl(220 20% 16% / 0.08);
+    --card-shadow-hover: 0 16px 40px -10px hsl(174 50% 36% / 0.18);
+    --glass-bg: hsl(0 0% 100% / 0.75);
+    --glass-border: hsl(0 0% 100% / 0.4);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -44,31 +48,35 @@
   }
 
   .dark {
-    --background: 210 30% 8%;
-    --foreground: 210 20% 92%;
-    --card: 210 25% 12%;
-    --card-foreground: 210 20% 92%;
-    --popover: 210 25% 12%;
-    --popover-foreground: 210 20% 92%;
-    --primary: 178 55% 42%;
+    --background: 220 25% 7%;
+    --foreground: 35 15% 90%;
+    --card: 220 22% 11%;
+    --card-foreground: 35 15% 90%;
+    --popover: 220 22% 11%;
+    --popover-foreground: 35 15% 90%;
+    --primary: 174 48% 40%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 25% 18%;
-    --secondary-foreground: 210 20% 92%;
-    --muted: 210 20% 18%;
-    --muted-foreground: 210 15% 55%;
-    --accent: 152 50% 42%;
+    --secondary: 220 20% 16%;
+    --secondary-foreground: 35 15% 90%;
+    --muted: 220 18% 16%;
+    --muted-foreground: 220 12% 55%;
+    --accent: 155 42% 38%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 210 40% 98%;
-    --border: 210 20% 20%;
-    --input: 210 20% 20%;
-    --ring: 178 55% 42%;
+    --border: 220 18% 18%;
+    --input: 220 18% 18%;
+    --ring: 174 48% 40%;
+    --warm: 25 55% 50%;
+    --warm-foreground: 0 0% 100%;
 
-    --hero-gradient: linear-gradient(135deg, hsl(200 40% 15%), hsl(210 35% 18%), hsl(200 40% 15%));
-    --card-shadow: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
-    --card-shadow-hover: 0 12px 32px -8px hsl(178 55% 42% / 0.25);
-    --glass-bg: hsl(210 25% 12% / 0.7);
-    --glass-border: hsl(210 20% 25% / 0.3);
+    --hero-gradient: linear-gradient(135deg, hsl(220 30% 12%), hsl(200 25% 15%), hsl(220 25% 12%));
+    --warm-gradient: linear-gradient(135deg, hsl(25 40% 30%), hsl(15 35% 28%));
+    --soft-gradient: linear-gradient(135deg, hsl(220 22% 11%), hsl(220 20% 14%));
+    --card-shadow: 0 4px 24px -6px hsl(0 0% 0% / 0.3);
+    --card-shadow-hover: 0 16px 40px -10px hsl(174 48% 40% / 0.2);
+    --glass-bg: hsl(220 22% 11% / 0.75);
+    --glass-border: hsl(220 18% 20% / 0.4);
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -86,7 +94,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
@@ -96,7 +104,8 @@
 @layer utilities {
   .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
   }
   .text-gradient {
@@ -105,10 +114,13 @@
   }
   .card-hover {
     box-shadow: var(--card-shadow);
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .card-hover:hover {
     box-shadow: var(--card-shadow-hover);
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+  }
+  .section-padding {
+    @apply py-20 md:py-28;
   }
 }

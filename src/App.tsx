@@ -4,11 +4,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
+import About from "./pages/About.tsx";
+import Journey from "./pages/Journey.tsx";
+import Achievements from "./pages/Achievements.tsx";
 import Blog from "./pages/Blog.tsx";
 import StudyNotes from "./pages/StudyNotes.tsx";
-import ClinicalCases from "./pages/ClinicalCases.tsx";
-import ExamPrep from "./pages/ExamPrep.tsx";
-import About from "./pages/About.tsx";
+import Practices from "./pages/Practices.tsx";
 import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -22,11 +23,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/journey" element={<Journey />} />
+          <Route path="/achievements" element={<Achievements />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/notes" element={<StudyNotes />} />
-          <Route path="/clinical-cases" element={<ClinicalCases />} />
-          <Route path="/exam-prep" element={<ExamPrep />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/practices" element={<Practices />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
