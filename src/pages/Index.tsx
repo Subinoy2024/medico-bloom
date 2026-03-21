@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getContent, SiteContent } from "@/lib/content-store";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import ankitaPhoto from "@/assets/ankita-photo.jpg";
