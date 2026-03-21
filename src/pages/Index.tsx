@@ -116,7 +116,7 @@ const Index = () => {
           <span className="text-sm text-accent font-semibold tracking-wider uppercase mb-4 block">About Me</span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">A Little About Ankita</h2>
           <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-            I'm a medical student who believes in the power of sharing knowledge. Through this blog, I document my MBBS journey — the lessons, the struggles, the small victories, and everything in between.
+            {content.aboutIntro}
           </p>
           <Link to="/about" className="inline-flex items-center gap-1 text-primary font-semibold hover:underline">
             Read more about me <ChevronRight className="w-4 h-4" />
