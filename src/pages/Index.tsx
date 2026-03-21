@@ -218,7 +218,7 @@ const Index = () => {
           </Link>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
-          {blogPosts.map((post, i) => (
+          {content.blogPosts.map((post, i) => (
             <div key={post.title} className="card-hover bg-card rounded-2xl overflow-hidden border border-border group">
               <div className={`h-44 flex items-center justify-center ${i === 0 ? "bg-gradient-to-br from-primary/15 to-accent/10" : i === 1 ? "bg-gradient-to-br from-accent/10 to-warm/10" : "bg-gradient-to-br from-warm/10 to-primary/10"}`}>
                 <BookMarked className="w-12 h-12 text-primary/20 group-hover:scale-110 transition-transform duration-500" />
