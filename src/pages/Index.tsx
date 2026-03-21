@@ -12,6 +12,8 @@ import {
   Quote, BookMarked, Sun, Coffee
 } from "lucide-react";
 
+// Static data kept outside component
+
 const whatIShare = [
   { icon: Heart, title: "My Story", desc: "Personal experiences and reflections from my MBBS journey" },
   { icon: Award, title: "Achievements", desc: "Milestones, recognitions, and small victories along the way" },
