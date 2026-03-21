@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import ankitaPhoto from "@/assets/ankita-photo.jpg";
-import studyImg from "@/assets/ankita-study.jpg";
+import ankitaPhoto2 from "@/assets/ankita-photo.jpg";
 import {
   BookOpen, Heart, Sparkles, ArrowRight, Clock, Star, ChevronRight,
   Download, Lightbulb, Target, Award, Users, Send, PenTool,
