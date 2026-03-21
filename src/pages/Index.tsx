@@ -43,7 +43,11 @@ const quotes = [
   "Stay curious, stay humble, keep learning.",
 ];
 
-const Index = () => (
+const Index = () => {
+  const [content, setContent] = useState<SiteContent>(getContent());
+  useEffect(() => { setContent(getContent()); }, []);
+  
+  return (
   <Layout>
     {/* Hero */}
     <section className="relative overflow-hidden min-h-[90vh] flex items-center">
