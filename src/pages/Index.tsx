@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getContent, SiteContent } from "@/lib/content-store";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import ankitaPhoto from "@/assets/ankita-photo.jpg";
@@ -9,6 +11,8 @@ import {
   Stethoscope, Brain, GraduationCap, Flame, Calendar, CheckCircle,
   Quote, BookMarked, Sun, Coffee
 } from "lucide-react";
+
+// Static data kept outside component
 
 const whatIShare = [
   { icon: Heart, title: "My Story", desc: "Personal experiences and reflections from my MBBS journey" },
@@ -39,7 +43,11 @@ const quotes = [
   "Stay curious, stay humble, keep learning.",
 ];
 
-const Index = () => (
+const Index = () => {
+  const [content, setContent] = useState<SiteContent>(getContent());
+  useEffect(() => { setContent(getContent()); }, []);
+  
+  return (
   <Layout>
     {/* Hero */}
     <section className="relative overflow-hidden min-h-[90vh] flex items-center">
@@ -60,7 +68,7 @@ const Index = () => (
               <span className="block mt-1">Debnath</span>
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/70 leading-relaxed mb-10 max-w-lg">
-              An MBBS student sharing my journey, achievements, medical learning, study practices, and life experiences to inspire and support others.
+              {content.heroSubtext}
             </p>
             <div className="flex flex-wrap gap-4 mb-12">
               <Button size="lg" asChild className="rounded-full font-semibold shadow-xl bg-accent hover:bg-accent/90 text-accent-foreground px-7">
@@ -108,7 +116,7 @@ const Index = () => (
           <span className="text-sm text-accent font-semibold tracking-wider uppercase mb-4 block">About Me</span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">A Little About Ankita</h2>
           <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-            I'm a medical student who believes in the power of sharing knowledge. Through this blog, I document my MBBS journey — the lessons, the struggles, the small victories, and everything in between.
+            {content.aboutIntro}
           </p>
           <Link to="/about" className="inline-flex items-center gap-1 text-primary font-semibold hover:underline">
             Read more about me <ChevronRight className="w-4 h-4" />
@@ -210,7 +218,7 @@ const Index = () => (
           </Link>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
-          {blogPosts.map((post, i) => (
+          {content.blogPosts.map((post, i) => (
             <div key={post.title} className="card-hover bg-card rounded-2xl overflow-hidden border border-border group">
               <div className={`h-44 flex items-center justify-center ${i === 0 ? "bg-gradient-to-br from-primary/15 to-accent/10" : i === 1 ? "bg-gradient-to-br from-accent/10 to-warm/10" : "bg-gradient-to-br from-warm/10 to-primary/10"}`}>
                 <BookMarked className="w-12 h-12 text-primary/20 group-hover:scale-110 transition-transform duration-500" />
@@ -338,7 +346,7 @@ const Index = () => (
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">Words I Live By</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {quotes.map((q, i) => (
+          {content.quotes.map((q, i) => (
             <div key={i} className={`rounded-2xl p-7 border border-border text-center card-hover ${i === 1 ? "bg-gradient-to-br from-accent/5 to-warm/5" : "bg-card"}`}>
               <div className="w-11 h-11 rounded-full bg-warm/10 flex items-center justify-center mx-auto mb-4">
                 <Quote className="w-5 h-5 text-warm" />
@@ -400,6 +408,7 @@ const Index = () => (
       </div>
     </section>
   </Layout>
-);
+  );
+};
 
 export default Index;
