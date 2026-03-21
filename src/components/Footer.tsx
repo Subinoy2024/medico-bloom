@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <Link to="/" className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <Heart className="w-4 h-4 text-primary-foreground fill-primary-foreground" />
               </div>
               <span className="text-lg font-display font-bold text-foreground">Ankita Debnath</span>
@@ -20,7 +20,7 @@ const Footer = () => {
             </p>
             <div className="flex gap-2.5">
               {[Instagram, Twitter, Youtube, Linkedin].map((Icon, i) => (
-                <a key={i} href="#" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                <a key={i} href="#" className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-300">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
@@ -30,7 +30,7 @@ const Footer = () => {
             <h4 className="font-display font-semibold text-foreground mb-4 text-sm">Pages</h4>
             <div className="flex flex-col gap-2.5">
               {[{ n: "About Ankita", p: "/about" }, { n: "My Journey", p: "/journey" }, { n: "Achievements", p: "/achievements" }, { n: "Blog", p: "/blog" }, { n: "Study Notes", p: "/notes" }, { n: "Practices", p: "/practices" }].map(({ n, p }) => (
-                <Link key={n} to={p} className="text-sm text-muted-foreground hover:text-primary transition-colors">{n}</Link>
+                <Link key={n} to={p} className="text-sm text-muted-foreground hover:text-accent transition-colors">{n}</Link>
               ))}
             </div>
           </div>
@@ -38,13 +38,13 @@ const Footer = () => {
             <h4 className="font-display font-semibold text-foreground mb-4 text-sm">Blog Topics</h4>
             <div className="flex flex-col gap-2.5">
               {["My Story", "Medical Learning", "Study Tips", "Student Life", "Motivation", "Reflections"].map((s) => (
-                <Link key={s} to="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">{s}</Link>
+                <Link key={s} to="/blog" className="text-sm text-muted-foreground hover:text-accent transition-colors">{s}</Link>
               ))}
             </div>
           </div>
           <div>
             <h4 className="font-display font-semibold text-foreground mb-4 text-sm">Get in Touch</h4>
-            <a href="mailto:ankita@example.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-3">
+            <a href="mailto:ankita@example.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors mb-3">
               <Mail className="w-4 h-4" /> ankita@example.com
             </a>
             <p className="text-sm text-muted-foreground leading-relaxed">Feel free to connect, collaborate, or just say hello!</p>
@@ -52,7 +52,7 @@ const Footer = () => {
         </div>
         <div className="border-t border-border mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">© 2026 Ankita Debnath. Made with ❤️</p>
-          <button onClick={scrollToTop} className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:opacity-90 transition-opacity">
+          <button onClick={scrollToTop} className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground hover:opacity-90 transition-opacity shadow-md">
             <ArrowUp className="w-5 h-5" />
           </button>
         </div>
