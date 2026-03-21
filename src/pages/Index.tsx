@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import ankitaPhoto from "@/assets/ankita-photo.jpg";
-import studyImg from "@/assets/ankita-study.jpg";
+import ankitaPhoto2 from "@/assets/ankita-photo.jpg";
 import {
   BookOpen, Heart, Sparkles, ArrowRight, Clock, Star, ChevronRight,
   Download, Lightbulb, Target, Award, Users, Send, PenTool,
@@ -123,7 +123,7 @@ const Index = () => (
         <div className="grid lg:grid-cols-2 gap-14 items-center">
           <div className="relative">
             <div className="absolute -inset-4 rounded-3xl bg-primary/5 blur-2xl" />
-            <img src={studyImg} alt="Ankita studying" className="relative w-full object-cover aspect-[16/11] rounded-3xl shadow-lg" />
+            <img src={ankitaPhoto2} alt="Ankita studying" className="relative w-full object-cover aspect-[16/11] rounded-3xl shadow-lg" />
           </div>
           <div>
             <span className="text-sm text-accent font-semibold tracking-wider uppercase mb-4 block">My Story</span>
