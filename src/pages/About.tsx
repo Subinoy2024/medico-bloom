@@ -1,60 +1,52 @@
 import Layout from "@/components/Layout";
-import { Heart, Target, BookOpen, Award, Users, Sparkles } from "lucide-react";
+import heroImg from "@/assets/ankita-hero.jpg";
+import { Heart, Target, BookOpen, Eye, Sparkles, GraduationCap } from "lucide-react";
 
 const About = () => (
   <Layout>
-    <section className="py-16">
+    <section className="section-padding">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-3">About Medico Journey</h1>
-          <p className="text-muted-foreground max-w-lg mx-auto">The story behind your favorite MBBS learning companion.</p>
+          <span className="text-sm text-primary font-medium tracking-wider uppercase mb-4 block">About</span>
+          <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-3">About Ankita</h1>
+          <p className="text-muted-foreground max-w-lg mx-auto">The person behind the words, the notes, and the journey.</p>
         </div>
 
-        {/* Profile */}
+        {/* Profile Card */}
         <div className="bg-card rounded-3xl border border-border p-8 md:p-12 mb-16">
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground flex-shrink-0">
-              <span className="text-4xl font-display font-bold">MJ</span>
-            </div>
+            <img src={heroImg} alt="Ankita Debnath" className="w-40 h-40 rounded-2xl object-cover shadow-lg flex-shrink-0" />
             <div>
-              <h2 className="text-2xl font-display font-bold text-foreground mb-2">Hey, I'm a fellow MBBS student! 👋</h2>
+              <h2 className="text-2xl font-display font-bold text-foreground mb-1">Ankita Debnath</h2>
+              <p className="text-sm text-primary font-medium mb-4">MBBS Student • Aspiring Doctor • Content Creator</p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                I started Medico Journey during my 2nd year of MBBS because I struggled to find simplified, exam-oriented notes that actually made sense. Most resources were either too complex or too superficial.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                So I began creating my own notes, mnemonics, and case discussions — and shared them with classmates who found them incredibly helpful. That's how Medico Journey was born.
+                Hi! I'm Ankita — a medical student with a deep love for learning, sharing, and growing. I believe that the best way to learn something is to teach it, and that's exactly what this blog is about.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Today, this platform serves thousands of medical students with free, high-quality study material. My mission is simple: <span className="text-primary font-medium">make MBBS learning less stressful and more effective.</span>
+                When I'm not studying Pathology or making colorful notes, you'll find me reading, journaling, or dreaming about the kind of doctor I want to become. This space is my way of documenting it all — honestly and openly.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Mission & Values */}
-        <div className="grid sm:grid-cols-2 gap-6 mb-16">
+        {/* Sections */}
+        <div className="space-y-16">
           {[
-            { icon: Target, title: "Mission", desc: "To democratize medical education by creating free, simplified, and exam-focused resources for every MBBS student." },
-            { icon: Heart, title: "Why This Exists", desc: "Because every medical student deserves access to quality study material without spending a fortune on coaching classes." },
-            { icon: BookOpen, title: "What We Offer", desc: "Comprehensive notes, clinical case discussions, exam strategies, mnemonics, and a supportive community for medical students." },
-            { icon: Award, title: "Achievements", desc: "Helped 5000+ students, 200+ study notes published, featured in student communities, and growing every day." },
-          ].map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="card-hover bg-card rounded-2xl p-6 border border-border">
-              <Icon className="w-8 h-8 text-primary mb-4" />
-              <h3 className="font-display font-semibold text-foreground mb-2">{title}</h3>
-              <p className="text-sm text-muted-foreground">{desc}</p>
+            { icon: Heart, title: "Who I Am", content: "I'm a curious, driven, and slightly perfectionistic medical student who finds joy in understanding the 'why' behind everything. I value discipline, kindness, and continuous self-improvement. Medicine, for me, is not just a profession — it's a way of seeing and serving the world." },
+            { icon: Sparkles, title: "Why I Started Sharing", content: "During my early MBBS years, I realized how many students struggle to find simplified, well-organized study resources. I started making notes for myself, shared them with a few friends, and the feedback was overwhelming. That's when I decided to create this platform — to make quality medical learning accessible, personal, and inspiring." },
+            { icon: GraduationCap, title: "What Medicine Means to Me", content: "Medicine is the perfect blend of science and humanity. Every patient has a story, every disease has a lesson, and every day in medical school teaches me something new about myself. I chose this path because I want to make a real difference — one patient, one student, one note at a time." },
+            { icon: Eye, title: "My Vision", content: "I envision a world where medical education is not just about rote learning and competition, but about genuine understanding, collaboration, and personal growth. Through this blog, I want to build a warm, supportive community of medical students who uplift each other." },
+          ].map(({ icon: Icon, title, content }) => (
+            <div key={title} className="flex gap-6 items-start">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 mt-1">
+                <Icon className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-display font-bold text-foreground mb-3">{title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{content}</p>
+              </div>
             </div>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="rounded-3xl overflow-hidden relative">
-          <div className="absolute inset-0 bg-[image:var(--hero-gradient)]" />
-          <div className="relative z-10 py-12 px-8 text-center">
-            <Sparkles className="w-10 h-10 text-primary-foreground/60 mx-auto mb-4" />
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-primary-foreground mb-3">Join the Journey</h2>
-            <p className="text-primary-foreground/70 max-w-md mx-auto">Want to contribute, collaborate, or just say hi? I'd love to connect with fellow medical students!</p>
-          </div>
         </div>
       </div>
     </section>
