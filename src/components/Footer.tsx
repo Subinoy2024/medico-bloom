@@ -51,7 +51,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">© 2026 Ankita Debnath. Made with ❤️</p>
+          <p className="text-sm text-muted-foreground">© 2026 Ankita Debnath. Made by <a href="https://dccloud.in.net" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">dccloud.in.net</a> ❤️</p>
           <button onClick={scrollToTop} className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground hover:opacity-90 transition-opacity shadow-md">
             <ArrowUp className="w-5 h-5" />
           </button>
