@@ -40,7 +40,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-semibold text-foreground mb-4 text-sm">Pages</h4>
             <div className="flex flex-col gap-2.5">
-              {[{ n: "About Ankita", p: "/about" }, { n: "My Journey", p: "/journey" }, { n: "Achievements", p: "/achievements" }, { n: "Blog", p: "/blog" }, { n: "Study Notes", p: "/notes" }, { n: "Practices", p: "/practices" }].map(({ n, p }) => (
+              {[{ n: "About Ankita", p: "/about" }, { n: "My Journey", p: "/journey" }, { n: "Achievements", p: "/achievements" }, { n: "Blog", p: "/blog" }, { n: "Research", p: "/research" }, { n: "Practices", p: "/practices" }].map(({ n, p }) => (
                 <Link key={n} to={p} className="text-sm text-muted-foreground hover:text-accent transition-colors">{n}</Link>
               ))}
             </div>
