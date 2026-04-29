@@ -16,7 +16,7 @@ const Journey = () => {
           <div className="text-center mb-16">
             <span className="text-sm text-primary font-medium tracking-wider uppercase mb-4 block">My Story</span>
             <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-3">My Journey</h1>
-            <p className="text-muted-foreground max-w-lg mx-auto">From a dreaming school kid to an MBBS student.</p>
+            <p className="text-muted-foreground max-w-lg mx-auto">From a dreaming school kid to a practicing doctor.</p>
           </div>
 
           {c.journeyTimeline.length > 0 ? (
