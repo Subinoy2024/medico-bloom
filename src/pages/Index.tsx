@@ -218,7 +218,7 @@ const Index = () => {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {c.knowledgeCorner.map((k) => (
-                <Link key={k.id} to="/notes" className="card-hover bg-card rounded-2xl p-6 border border-border group text-center">
+                <Link key={k.id} to="/research" className="card-hover bg-card rounded-2xl p-6 border border-border group text-center">
                   <Icon name={k.iconKey} className="w-7 h-7 text-primary mx-auto mb-3" />
                   <h3 className="font-display font-semibold text-foreground text-sm mb-1">{k.title}</h3>
                   <p className="text-xs text-muted-foreground">{k.desc}</p>

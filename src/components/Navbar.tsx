@@ -9,7 +9,7 @@ const navLinks = [
   { name: "My Journey", path: "/journey" },
   { name: "Achievements", path: "/achievements" },
   { name: "Blog", path: "/blog" },
-  { name: "Notes", path: "/notes" },
+  { name: "Research", path: "/research" },
   { name: "Practices", path: "/practices" },
   { name: "Contact", path: "/contact" },
 ];
@@ -39,7 +39,7 @@ const Navbar = () => {
           </div>
           <div className="flex flex-col">
             <span className="text-lg font-display font-bold text-foreground leading-tight">Ankita Debnath</span>
-            <span className="text-[10px] text-muted-foreground tracking-widest uppercase hidden sm:block">MBBS Journey</span>
+            <span className="text-[10px] text-muted-foreground tracking-widest uppercase hidden sm:block">Doctor · Writer</span>
           </div>
         </Link>
 

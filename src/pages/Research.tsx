@@ -5,15 +5,15 @@ import { getContent, SiteContent } from "@/lib/content-store";
 import { BookOpen, Search, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const StudyNotes = () => {
+const Research = () => {
   const [c, setC] = useState<SiteContent>(getContent());
   useEffect(() => { setC(getContent()); }, []);
   const [search, setSearch] = useState("");
-  const [year, setYear] = useState("All Years");
+  const [year, setYear] = useState("All Areas");
 
-  const years = ["All Years", ...Array.from(new Set(c.subjects.map((s) => s.year)))];
+  const years = ["All Areas", ...Array.from(new Set(c.subjects.map((s) => s.year)))];
   const filtered = c.subjects.filter(
-    (s) => s.name.toLowerCase().includes(search.toLowerCase()) && (year === "All Years" || s.year === year)
+    (s) => s.name.toLowerCase().includes(search.toLowerCase()) && (year === "All Areas" || s.year === year)
   );
 
   return (
@@ -22,14 +22,14 @@ const StudyNotes = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="text-sm text-primary font-medium tracking-wider uppercase mb-4 block">Resources</span>
-            <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-3">Study Notes</h1>
-            <p className="text-muted-foreground max-w-lg mx-auto">Well-organized notes for every MBBS subject.</p>
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-3">Research</h1>
+            <p className="text-muted-foreground max-w-lg mx-auto">Clinical topics, evidence summaries, and research notes across medical specialties.</p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-10 max-w-xl mx-auto">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search subjects..." className="w-full pl-11 pr-4 py-3 rounded-full bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
+              <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search topics..." className="w-full pl-11 pr-4 py-3 rounded-full bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
             </div>
             <select value={year} onChange={(e) => setYear(e.target.value)} className="px-5 py-3 rounded-full bg-card border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
               {years.map((y) => <option key={y}>{y}</option>)}
@@ -79,4 +79,4 @@ const StudyNotes = () => {
   );
 };
 
-export default StudyNotes;
+export default Research;

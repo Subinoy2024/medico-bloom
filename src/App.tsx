@@ -9,7 +9,7 @@ import About from "./pages/About.tsx";
 import Journey from "./pages/Journey.tsx";
 import Achievements from "./pages/Achievements.tsx";
 import Blog from "./pages/Blog.tsx";
-import StudyNotes from "./pages/StudyNotes.tsx";
+import Research from "./pages/Research.tsx";
 import Practices from "./pages/Practices.tsx";
 import Contact from "./pages/Contact.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
@@ -31,7 +31,7 @@ const App = () => (
             <Route path="/journey" element={<Journey />} />
             <Route path="/achievements" element={<Achievements />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/notes" element={<StudyNotes />} />
+            <Route path="/research" element={<Research />} />
             <Route path="/practices" element={<Practices />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<AdminLogin />} />
