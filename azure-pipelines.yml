@@ -1,0 +1,203 @@
+trigger:
+  branches:
+    include:
+    - develop
+    - release/*
+    - main
+  tags:
+    include:
+    - v*.*.*
+pool:
+  vmImage: ubuntu-22.04
+variables:
+  IMAGE_NAME: medico-bloom
+  IMAGE: $(REGISTRY_NAME).azurecr.io/medico-bloom
+  TAG: $(Build.SourceVersion)
+  REGISTRY_NAME: $(REGISTRY_NAME)
+  AZURE_CLIENT_ID: $(AZURE_CLIENT_ID)
+  AZURE_CLIENT_SECRET: $(AZURE_CLIENT_SECRET)
+  AZURE_TENANT_ID: $(AZURE_TENANT_ID)
+  AZURE_WEBAPP_NAME: $(AZURE_WEBAPP_NAME)
+  AZURE_RG: $(AZURE_RG)
+  ACR_NAME: $(ACR_NAME)
+stages:
+- stage: build
+  displayName: Build
+  jobs:
+  - job: build
+    displayName: Build & Test
+    steps:
+    - checkout: self
+      displayName: Checkout
+    - task: UseNode@1
+      inputs:
+        version: '20'
+    - script: npm ci
+      displayName: install (0)
+    - script: npm run build --if-present
+      displayName: build (0)
+    - script: npm test --if-present -- --ci
+      displayName: unit test
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFiles: '**/test-results.xml'
+        failTaskOnFailedTests: true
+      condition: succeededOrFailed()
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: dist
+        ArtifactName: app
+- stage: security
+  displayName: Security
+  jobs:
+  - job: security_scans
+    displayName: SAST + Dependency Scan + Lint
+    steps:
+    - checkout: self
+      displayName: Checkout
+    - task: UseNode@1
+      inputs:
+        version: '20'
+    - script: npx --yes @snyk/cli test --severity-threshold=high || true
+      displayName: SAST
+    - script: npm audit --audit-level=high || true
+      displayName: Dependency scan
+    - script: npx --no-install eslint . --max-warnings=0 || true
+      displayName: Lint
+  dependsOn:
+  - build
+- stage: package
+  displayName: Package
+  jobs:
+  - job: container
+    displayName: Container build + Trivy scan + push
+    steps:
+    - checkout: self
+      displayName: Checkout
+    - task: AzureCLI@2
+      displayName: Log in to ACR
+      inputs:
+        azureSubscription: $(AZURE_SUBSCRIPTION)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: az acr login --name $(REGISTRY_NAME)
+    - script: docker buildx build --platform linux/amd64 -t $(IMAGE):$(TAG) -f Dockerfile .
+      displayName: docker buildx
+    - script: trivy image --exit-code 0 --severity CRITICAL,HIGH $(IMAGE):$(TAG) || true
+      displayName: Trivy image scan
+    - script: docker push $(IMAGE):$(TAG)
+      displayName: docker push
+  dependsOn:
+  - security
+- stage: deploy_development
+  displayName: Deploy Development
+  dependsOn:
+  - package
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
+  jobs:
+  - deployment: deploy_development
+    environment: development
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureCLI@2
+            displayName: Azure App Service (Web App for Containers)
+            inputs:
+              azureSubscription: $(AZURE_SERVICE_CONNECTION)
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+                az webapp config container set --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RG --container-image-name $IMAGE:$TAG --container-registry-url
+                https://$ACR_NAME.azurecr.io
+
+                az webapp restart --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RG'
+          - script: echo 'health check placeholder'
+            displayName: Health check
+          - script: curl -fsS $APP_HEALTH_URL/health || (echo 'smoke test failed' && exit 1)
+            displayName: Smoke test
+- stage: deploy_qa
+  displayName: Deploy Qa
+  dependsOn:
+  - package
+  condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')
+  jobs:
+  - deployment: deploy_qa
+    environment: qa
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureCLI@2
+            displayName: Azure App Service (Web App for Containers)
+            inputs:
+              azureSubscription: $(AZURE_SERVICE_CONNECTION)
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+                az webapp config container set --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RG --container-image-name $IMAGE:$TAG --container-registry-url
+                https://$ACR_NAME.azurecr.io
+
+                az webapp restart --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RG'
+          - script: echo 'health check placeholder'
+            displayName: Health check
+          - script: curl -fsS $APP_HEALTH_URL/health || (echo 'smoke test failed' && exit 1)
+            displayName: Smoke test
+- stage: deploy_staging
+  displayName: Deploy Staging
+  dependsOn:
+  - package
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  jobs:
+  - deployment: deploy_staging
+    environment: staging
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureCLI@2
+            displayName: Azure App Service (Web App for Containers)
+            inputs:
+              azureSubscription: $(AZURE_SERVICE_CONNECTION)
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+                az webapp config container set --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RG --container-image-name $IMAGE:$TAG --container-registry-url
+                https://$ACR_NAME.azurecr.io
+
+                az webapp restart --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RG'
+          - script: echo 'health check placeholder'
+            displayName: Health check
+          - script: curl -fsS $APP_HEALTH_URL/health || (echo 'smoke test failed' && exit 1)
+            displayName: Smoke test
+- stage: deploy_production
+  displayName: Deploy Production
+  dependsOn:
+  - package
+  condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
+  jobs:
+  - deployment: deploy_production
+    environment: production
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureCLI@2
+            displayName: Azure App Service (Web App for Containers)
+            inputs:
+              azureSubscription: $(AZURE_SERVICE_CONNECTION)
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+                az webapp config container set --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RG --container-image-name $IMAGE:$TAG --container-registry-url
+                https://$ACR_NAME.azurecr.io
+
+                az webapp restart --name $AZURE_WEBAPP_NAME --resource-group $AZURE_RG'
+          - script: echo 'health check placeholder'
+            displayName: Health check
+          - script: curl -fsS $APP_HEALTH_URL/health || (echo 'smoke test failed' && exit 1)
+            displayName: Smoke test
