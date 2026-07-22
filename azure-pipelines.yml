@@ -1,3 +1,8 @@
+parameters:
+- name: azureServiceConnection
+  displayName: Azure Resource Manager service connection
+  type: string
+  default: azure-service-connection
 trigger:
   branches:
     include:
@@ -77,7 +82,7 @@ stages:
     - task: AzureCLI@2
       displayName: Log in to ACR
       inputs:
-        azureSubscription: $(AZURE_SUBSCRIPTION)
+        azureSubscription: ${{ parameters.azureServiceConnection }}
         scriptType: bash
         scriptLocation: inlineScript
         inlineScript: az acr login --name $(REGISTRY_NAME)
@@ -104,7 +109,7 @@ stages:
           - task: AzureCLI@2
             displayName: Azure App Service (Web App for Containers)
             inputs:
-              azureSubscription: $(AZURE_SERVICE_CONNECTION)
+              azureSubscription: ${{ parameters.azureServiceConnection }}
               scriptType: bash
               scriptLocation: inlineScript
               inlineScript: 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
@@ -132,7 +137,7 @@ stages:
           - task: AzureCLI@2
             displayName: Azure App Service (Web App for Containers)
             inputs:
-              azureSubscription: $(AZURE_SERVICE_CONNECTION)
+              azureSubscription: ${{ parameters.azureServiceConnection }}
               scriptType: bash
               scriptLocation: inlineScript
               inlineScript: 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
@@ -160,7 +165,7 @@ stages:
           - task: AzureCLI@2
             displayName: Azure App Service (Web App for Containers)
             inputs:
-              azureSubscription: $(AZURE_SERVICE_CONNECTION)
+              azureSubscription: ${{ parameters.azureServiceConnection }}
               scriptType: bash
               scriptLocation: inlineScript
               inlineScript: 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
@@ -188,7 +193,7 @@ stages:
           - task: AzureCLI@2
             displayName: Azure App Service (Web App for Containers)
             inputs:
-              azureSubscription: $(AZURE_SERVICE_CONNECTION)
+              azureSubscription: ${{ parameters.azureServiceConnection }}
               scriptType: bash
               scriptLocation: inlineScript
               inlineScript: 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
