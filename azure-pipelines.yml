@@ -8,18 +8,10 @@ trigger:
     include:
     - v*.*.*
 pool:
-  name: Default
+  name: default
 variables:
   IMAGE_NAME: medico-bloom
-  IMAGE: $(REGISTRY_NAME).azurecr.io/medico-bloom
   TAG: $(Build.SourceVersion)
-  REGISTRY_NAME: $(REGISTRY_NAME)
-  AZURE_CLIENT_ID: $(AZURE_CLIENT_ID)
-  AZURE_CLIENT_SECRET: $(AZURE_CLIENT_SECRET)
-  AZURE_TENANT_ID: $(AZURE_TENANT_ID)
-  AZURE_WEBAPP_NAME: $(AZURE_WEBAPP_NAME)
-  AZURE_RG: $(AZURE_RG)
-  ACR_NAME: $(ACR_NAME)
 stages:
 - stage: build
   displayName: Build
@@ -32,7 +24,7 @@ stages:
     - task: UseNode@1
       inputs:
         version: '20'
-    - script: npm ci
+    - script: npm ci || npm install --no-audit --no-fund
       displayName: install (0)
     - script: npm run build --if-present
       displayName: build (0)
